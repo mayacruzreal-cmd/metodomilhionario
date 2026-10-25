@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conversa com Maria Clara</title>
+<style>
+:root{--hd:#008069;--hdt:#fff;--bg:#efeae2;--in:#fff;--out:#d9fdd3;--tx:#111b21;--mt:#667781;--page:#d1d7db;--bar:#f0f2f5;--field:#fff;--btn:#00a884;--link:#027eb5;--tick:#53bdeb;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hd:#1f2c34;--bg:#0b141a;--in:#202c33;--out:#005c4b;--tx:#e9edef;--mt:#8696a0;--page:#0a1014;--bar:#1f2c34;--field:#2a3942;--link:#53bdeb}}
+:root[data-theme="dark"]{--hd:#1f2c34;--bg:#0b141a;--in:#202c33;--out:#005c4b;--tx:#e9edef;--mt:#8696a0;--page:#0a1014;--bar:#1f2c34;--field:#2a3942;--link:#53bdeb}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--page);color:var(--tx);font:15px/1.4 "Segoe UI",Helvetica,Arial,sans-serif;display:flex;justify-content:center}
+.app{width:100%;max-width:480px;height:100%;display:flex;flex-direction:column;background:var(--bg);box-shadow:0 0 40px rgba(0,0,0,.18)}
+header{background:var(--hd);color:var(--hdt);display:flex;align-items:center;gap:12px;padding:10px 14px}
+.av{width:40px;height:40px;border-radius:50%;background:#25d366;display:grid;place-items:center;font-weight:700;color:#073b2a;flex:none}
+header b{display:block;font-size:16px;font-weight:600}
+header small{font-size:12.5px;opacity:.85}
+#chat{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:5px;background-image:radial-gradient(rgba(127,127,127,.09) 1px,transparent 1px);background-size:18px 18px}
+.day{align-self:center;background:var(--in);color:var(--mt);font-size:12px;padding:4px 10px;border-radius:8px;margin-bottom:6px}
+.msg{max-width:82%;padding:6px 9px 4px;border-radius:9px;background:var(--in);box-shadow:0 1px .5px rgba(0,0,0,.13);word-wrap:break-word;white-space:pre-line}
+.msg.in{align-self:flex-start;border-top-left-radius:2px}
+.msg.out{align-self:flex-end;background:var(--out);border-top-right-radius:2px}
+.meta{float:right;margin:6px 0 0 12px;font-size:11px;color:var(--mt)}
+.tick{font-style:normal;letter-spacing:-3px;margin-left:2px}.tick.read{color:var(--tick)}
+.typing{display:flex;gap:4px;padding:11px 12px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--mt);animation:b 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.offer{display:block;white-space:normal;min-width:230px}
+.offer h3{margin:0 0 2px;font-size:16px}
+.offer s{color:var(--mt)}
+.offer .price{font-size:24px;font-weight:700;margin:2px 0 6px}
+.offer ul{margin:0 0 8px;padding-left:18px}
+.pay{display:block;text-align:center;background:var(--btn);color:#fff;text-decoration:none;font-weight:600;padding:10px;border-radius:8px;margin-top:6px}
+.pay:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--tick);outline-offset:2px}
+#opts{display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 8px;justify-content:flex-end}
+#opts button{background:var(--in);color:var(--link);border:1px solid rgba(127,127,127,.25);border-radius:18px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+form{display:flex;gap:8px;padding:8px 10px;background:var(--bar)}
+input{flex:1;min-width:0;border:0;border-radius:22px;padding:11px 16px;font:inherit;background:var(--field);color:var(--tx)}
+form button{width:44px;height:44px;border:0;border-radius:50%;background:var(--btn);color:#fff;cursor:pointer;font-size:18px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#111b21;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;max-width:90%;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+.qr{background:#fff;padding:10px;border-radius:8px;width:fit-content;margin:8px auto;min-height:20px}.code{font-size:12px;word-break:break-all;background:rgba(127,127,127,.15);border-radius:6px;padding:8px;margin:4px 0}button.pay{width:100%;border:0;font:inherit;font-weight:600;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none}}
+.tbl{width:100%;border-collapse:collapse;white-space:normal}.tbl td{padding:7px 4px;border-top:1px solid rgba(127,127,127,.25)}.tbl tr:first-child td{border-top:0}.tbl td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:12px}.tbl small{display:block;color:var(--mt)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><div class="av" id="av">M</div><div><b id="nm">Maria Clara</b><small id="status">online</small></div></header>
+  <div id="chat" aria-live="polite"><div class="day">Hoje</div></div>
+  <div id="opts"></div>
+  <form id="f" autocomplete="off"><input id="in" placeholder="Digite uma mensagem" aria-label="Mensagem"><button aria-label="Enviar">➤</button></form>
+</div>
+<div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ===== CONFIGURAÇÃO — troque pelos dados reais ===== */
+const CFG={
+  atendente:"Maria Clara",
+  produto:"Conteúdos Maria Clara",
+  checkout:"#", /* link do gateway entra aqui na próxima etapa */
+  pixCode:"",
+  planos:[
+    {n:"Inicial",d:"Para começar",p:"R$ 9,90"},
+    {n:"Básico",d:"Conteúdos essenciais",p:"R$ 19,90"},
+    {n:"Completo",d:"Básico + extras",p:"R$ 29,90"},
+    {n:"VIP",d:"Acesso total + novidades",p:"R$ 49,90"},
+    {n:"Chamada de vídeo",d:"Chamada exclusiva só nossa",p:"R$ 69,90"}
+  ]
+};
+/* ==================================================== */
+const $=s=>document.querySelector(s);
+const chat=$("#chat"),opts=$("#opts"),st=$("#status"),inp=$("#in");
+let step="start",lead={},plan=null,busy=false;
+$("#nm").textContent=CFG.atendente;$("#av").textContent=CFG.atendente[0];
+document.title="Conversa com "+CFG.atendente;
+const hm=()=>new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const down=()=>{chat.scrollTop=chat.scrollHeight};
+function add(cls,html){
+  const d=document.createElement("div");d.className="msg "+cls;
+  d.innerHTML=html+'<span class="meta">'+hm()+(cls==="out"?' <i class="tick">✓✓</i>':"")+"</span>";
+  chat.appendChild(d);down();
+  if(cls==="out")setTimeout(()=>d.querySelector(".tick").classList.add("read"),700);
+}
+/* mostra "digitando..." e responde após 4 a 5 segundos */
+async function bot(html,ms){
+  busy=true;st.textContent="digitando...";
+  const t=document.createElement("div");t.className="msg in typing";t.innerHTML="<i></i><i></i><i></i>";
+  chat.appendChild(t);down();
+  await sleep(ms||4000+Math.random()*1000);
+  t.remove();add("in",html);st.textContent="online";busy=false;
+}
+function setOpts(list){
+  opts.innerHTML="";
+  list.forEach(l=>{const b=document.createElement("button");b.type="button";b.textContent=l;b.onclick=()=>send(l);opts.appendChild(b)});
+  down();
+}
+const PLANS=()=>CFG.planos.map(p=>p.n);
+async function interest(){
+  step="interest";
+  await bot("Olá amor, tudo bem? Tem interesse nos conteúdos?");
+  setOpts(["Sim, tenho interesse","Quero saber mais"]);
+}
+async function more(){
+  await bot("São conteúdos exclusivos que eu preparo com muito carinho 💕 Quer ver os valores?");
+  setOpts(["Sim, quero ver","Agora não"]);
+}
+async function table(){
+  step="plan";
+  await bot("Que bom, amor! 😍 Olha os valores:");
+  const rows=CFG.planos.map(p=>"<tr><td><b>"+p.n+"</b><small>"+p.d+"</small></td><td>"+p.p+"</td></tr>").join("");
+  await bot('<span class="offer"><h3>Tabela de valores</h3><table class="tbl">'+rows+"</table></span>",2500);
+  await bot("Qual deles você quer, amor?",2000);
+  setOpts(PLANS());
+}
+async function choose(p){
+  plan=p;step="done";setOpts([]);
+  await bot("Ótima escolha, amor! 💕 Estou gerando seu Pix do plano <b>"+p.n+"</b>...",3000);
+  let d;
+  try{
+    const r=await fetch("/api/pix",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({plan:p.n})});
+    d=await r.json();if(!r.ok||!d.code)throw 0;
+  }catch(e){
+    await bot("Ai amor, não consegui gerar o Pix agora 😔 Quer tentar de novo?",2500);
+    return setOpts(PLANS());
+  }
+  CFG.pixCode=d.code;
+  await bot('<span class="offer"><h3>'+p.n+'</h3><div class="price">'+p.p+'</div><div class="qr"></div><small>Pix copia e cola</small><div class="code">'+d.code+'</div><button type="button" class="pay copy">Copiar código Pix</button></span>',2500);
+  const q=chat.lastElementChild.querySelector(".qr");
+  if(window.QRCode)new QRCode(q,{text:d.code,width:180,height:180});
+  down();watch(d.id);
+}
+async function watch(id){
+  for(let i=0;i<225;i++){
+    await sleep(4000);
+    try{
+      const s=await (await fetch("/api/status?id="+id)).json();
+      if(s.status==="paid")return paid(id);
+      if(s.status==="canceled"){await bot("Esse Pix foi cancelado, amor. Quer gerar outro?",2500);return setOpts(PLANS())}
+    }catch(e){}
+  }
+}
+async function paid(id){
+  step="contact";lead.id=id;
+  await bot("Pagamento confirmado, amor! 💕 Muito obrigada!",3000);
+  await bot("Me passa seu <b>WhatsApp</b> (com DDD) ou e-mail para eu te enviar o acesso agora.",3000);
+}
+async function pay(){
+  step="done";
+  const u=CFG.checkout==="#"?"#":CFG.checkout+(CFG.checkout.includes("?")?"&":"?")+"plan="+encodeURIComponent(plan.n)+"&name="+encodeURIComponent(lead.name)+"&email="+encodeURIComponent(lead.email);
+  await bot("Pronto, "+esc(lead.name)+"! Seu acesso vai para <b>"+esc(lead.email)+"</b> 💕");
+  await bot('<span class="offer"><h3>'+plan.n+'</h3><div class="price">'+plan.p+'</div>Pix ou cartão<a class="pay" href="'+u+'" target="_blank" rel="noopener">Pagar agora</a></span>',2500);
+}
+async function route(text){
+  const t=text.toLowerCase();
+  if(step==="interest"){
+    if(/n[aã]o|agora n|depois/.test(t))return bot("Tudo bem, amor! Se mudar de ideia é só me chamar 💕");
+    if(/mais|como|o que|conte/.test(t))return more();
+    if(/sim|tenho|quero|claro|pode|interesse|mand|bora|ver/.test(t))return table();
+    await bot("Amor, você tem interesse nos conteúdos?");return setOpts(["Sim, tenho interesse","Agora não"]);
+  }
+  const p=CFG.planos.find(p=>t.includes(p.n.toLowerCase().split(" ")[0]));
+  if(p)return choose(p);
+  if(/valor|pre[cç]o|tabela|quanto/.test(t))return table();
+  if(step==="done"||step==="end")return bot("Qualquer dúvida é só falar, amor 💕");
+  await bot("Me conta, amor, qual deles você prefere?");setOpts(PLANS());
+}
+async function send(text){
+  text=(text||"").trim();
+  if(!text||busy)return;
+  add("out",esc(text));inp.value="";setOpts([]);
+  await sleep(600);
+  if(step==="start")return interest();
+  if(step==="contact"){
+    fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:lead.id,contact:text})}).catch(()=>{});
+    step="end";return bot("Anotado, amor! Já já te chamo por lá 💕",3000);
+  }
+  if(step==="name"){
+    lead.name=text.split(" ")[0];step="email";
+    return bot("Prazer, "+esc(lead.name)+"! 😊 Agora me passa seu <b>melhor e-mail</b> para eu enviar o acesso.");
+  }
+  if(step==="email"){
+    if(!/^\S+@\S+\.\S+$/.test(text))return bot("Hmm amor, esse e-mail parece incompleto. Pode conferir e enviar de novo?");
+    lead.email=text;return pay();
+  }
+  route(text);
+}
+$("#f").addEventListener("submit",e=>{e.preventDefault();send(inp.value)});
+chat.addEventListener("click",e=>{
+  if(e.target.closest(".copy")){
+    const t=$("#toast");
+    const ok=()=>{t.textContent="Código Pix copiado";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200)};
+    try{navigator.clipboard.writeText(CFG.pixCode).then(ok,()=>{t.textContent="Selecione o código e copie";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2200)})}catch(_){ok()}
+    return;
+  }
+  const a=e.target.closest("a.pay");
+  if(a&&a.getAttribute("href")==="#"){
+    e.preventDefault();const t=$("#toast");
+    t.textContent="Link de checkout ainda não configurado. Entra na próxima etapa.";
+    t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2800);
+  }
+});
+setOpts(["Oi"]);
+</script>
+</body>
+</html>
