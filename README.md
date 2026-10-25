@@ -1,2 +1,0 @@
-# metodomilhionario
-Método milionário 
